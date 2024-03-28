@@ -13,7 +13,7 @@ services:
        networks:
         - default
    app:
-       image: prog9from7
+       image: event:1.0
        ports: 
        - 8080:8080
        environment:
