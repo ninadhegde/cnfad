@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+   db:
+       image: mysql:latest
+       environment:
+               DATABASE_HOST: docker-mysql
+               DATABASE_PORT: 3306
+               MYSQL_ROOT_PASSWORD: root
+               MYSQL_DATABASE: student
+               MYSQL_USER: admin
+               MYSQL_PASSWORD: root
+       networks:
+        - default
+   app:
+       image: myorg/myapp:latest
+       ports: 
+       - 8080:8080
+       environment:
+              spring.datasource.url: jdbc:mysql://db:3306/student
+              spring.datasource.driverClassName: com.mysql.cj.jdbc.Driver
+              spring.datasource.username: admin
+              spring.datasource.password: root
+       depends_on: 
+            - db
+       networks:
+            - default
